@@ -18,4 +18,36 @@ Enter `whatsa` in a terminal. It will ask you what you'd like to learn about, an
 
 ### Wishy-washy plans
 
-May or may not use the `summarize` ruby gem when all is said and done, instead of using the first paragraph. Might be a pain to install, though, so I'm keeping it simple. 
+May or may not use the `summarize` ruby gem when all is said and done, instead of using the first paragraph. Might be a pain to install, though, so I'm keeping it simple.
+
+## So what's yer structure, bucko?
+
+Well, let's see.
+
+- We'll have a `CLI` class that dictates the interface
+- We'll have a `Searcher` class which grabs the page you're looking for (maybe just do this in the Article class?)
+	- initialized with a term
+	- stores the HTML document as a nokogiri object
+	- yeah never mind this is just gonna be in the `Article` class
+- We'll have an `Article` class which provides an API for handling an article
+	- initialized with a search term
+	- stores the HTML document as a nokogiri object
+	- methods:
+		- `#disambiguation?` - returns true if it's a disambiguation page, false if not
+		- `#article?` - opposite of `#disambiguation?`
+		- `#summary` - returns the first paragraph of the article
+		- `#full_text` - returns the full introductory section
+		- `#toc` - returns a list of section names (corresponding to the keys of the `#contents` hash)
+		- `#contents` - returns a hash of section names, each pointing to an array of their paragraphs (maybe make the sections objects)
+		- `#title` - returns the article title
+		- `#dmb_choices` - returns a list of page titles the disambiguation page refers to, or `nil` if it's an article
+		- `#full_text` - returns the full text of the article, in plain text
+- We'll also have a `Section` class, I think, which handles a section of an article
+	- initialized with a section name and the parent `Article` object (not necessary, just store it when the `Article` creates it)
+	- stores the section name
+	- stores its paragraphs in an array
+	- maybe has subsections?
+	- methods:
+		- `#summary` - returns the first paragraph
+		- `#full_text` - returns the full text of the section
+		- `#title` - returns the section name
