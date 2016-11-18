@@ -1,0 +1,3 @@
+class Whatsa::Article
+
+end
