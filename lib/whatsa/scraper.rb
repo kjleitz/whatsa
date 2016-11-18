@@ -20,6 +20,7 @@ class Whatsa::Scraper
 
 end
 
+
 feces = Whatsa::Scraper.new("feces")      # search term that exists exactly
 poop = Whatsa::Scraper.new("poop")        # search term that redirects
 jiggly = Whatsa::Scraper.new("jiggly")    # search term that has results
