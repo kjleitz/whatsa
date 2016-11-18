@@ -27,10 +27,3 @@ class Whatsa::Scraper
   end
 
 end
-
-feces = Whatsa::Scraper.new("feces")      # search term that goes to an article
-poop = Whatsa::Scraper.new("poop")        # search term that disambiguates
-jiggly = Whatsa::Scraper.new("jiggly")    # search term that has results
-gg = Whatsa::Scraper.new("gobblegobble")  # search term that has no results
-
-binding.pry
