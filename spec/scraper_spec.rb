@@ -60,6 +60,40 @@ describe "Whatsa::Scraper" do
       expect(poop.disambig?).to be(true)
       expect(jiggly.disambig?).to be(false)
       expect(gg.disambig?).to be(false)
+
+      poop.disambig?.should be_a(TrueClass)
+    end
+  end
+
+  describe '#make_article' do
+
+    it "returns an Article object from searches that go directly to an article" do
+      expect(feces.make_article).to be_a(Whatsa::Article)
+    end
+
+    it "returns an Article object from the first entry of a disambiguation page" do
+      expect(poop.make_article).to be_a(Whatsa::Article)
+    end
+
+    it "returns an Article object from the first entry of a results page" do
+      expect(jiggly.make_article).to be_a(Whatsa::Article)
+    end
+
+    it "returns 'nil' for searches that matched zero articles" do
+      expect(gg.make_article).to be_nil
+    end
+  end
+
+  describe '#make_disambig' do
+
+    it "returns a Disambig object from searches that go to a disambiguation" do
+      expect(poop.make_disambig).to be_a(Whatsa::Disambig)
+    end
+
+    it "returns 'nil' for searches that did go to a disambiguation page" do
+      expect(feces.make_disambig).to be_nil
+      expect(jiggly.make_disambig).to be_nil
+      expect(gg.make_disambig).to be_nil
     end
   end
 
