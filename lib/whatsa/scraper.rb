@@ -26,4 +26,12 @@ class Whatsa::Scraper
     !self.page.css('#disambigbox').empty?
   end
 
+  def make_article
+    
+  end
+
+  def make_disambig
+
+  end
+
 end
