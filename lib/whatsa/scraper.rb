@@ -1,7 +1,3 @@
-require 'open-uri'
-require 'nokogiri'
-require 'pry'
-
 class Whatsa::Scraper
   attr_reader :query, :page
 
@@ -18,6 +14,15 @@ class Whatsa::Scraper
     !self.page.css('.searchresults').empty?
   end
 
+  def not_found?
+    !self.page.css('.mw-search-nonefound').empty?
+  end
+
 end
+
+feces = Whatsa::Scraper.new("feces")      # search term that exists exactly
+poop = Whatsa::Scraper.new("poop")        # search term that redirects
+jiggly = Whatsa::Scraper.new("jiggly")    # search term that has results
+gg = Whatsa::Scraper.new("gobblegobble")  # search term that has no results
 
 binding.pry
