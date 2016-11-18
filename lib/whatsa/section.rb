@@ -11,7 +11,7 @@ class Whatsa::Section
   end
 
   def full_text
-    
+    self.paragraphs.join('\n\n')
   end
 
 end
