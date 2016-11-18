@@ -18,11 +18,14 @@ class Whatsa::Scraper
     !self.page.css('.mw-search-nonefound').empty?
   end
 
+  def article?
+    !self.page.css('#ca-nstab-main').empty? && self.page.css('#disambigbox').empty?
+  end
+
 end
 
-
 feces = Whatsa::Scraper.new("feces")      # search term that exists exactly
-poop = Whatsa::Scraper.new("poop")        # search term that redirects
+poop = Whatsa::Scraper.new("poop")        # search term that disambiguates
 jiggly = Whatsa::Scraper.new("jiggly")    # search term that has results
 gg = Whatsa::Scraper.new("gobblegobble")  # search term that has no results
 
