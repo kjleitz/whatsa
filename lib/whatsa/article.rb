@@ -8,13 +8,17 @@ class Whatsa::Article
   end
 
   def make_contents
-    
+
   end
 
   def intro_pars
     content = page.css('#mw-content-text').children
     breakpoint = content.to_a.index { |element| element.name == 'h2' }
     content[0...breakpoint].css('p').map { |par| par.text }
+  end
+
+  def summary
+    intro_pars.first
   end
 
   private
