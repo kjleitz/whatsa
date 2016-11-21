@@ -2,6 +2,11 @@ require_relative 'spec_helper'
 
 describe 'Whatsa::Article' do
 
+  # The article described here does not actually have paragraphs in its sections.
+  # That is not a bug--it's just that every section is composed of bullet items
+  # (every section's text is a <ul> element). I've chosen not to include list
+  # items as "paragraphs".
+
   let(:test_sec) do
     pars = ["hello", "I am a paragraph.", "Welcome to the paragraph zone."]
     Whatsa::Section.new('Test', pars)
@@ -51,8 +56,6 @@ describe 'Whatsa::Article' do
   describe '#get_section_by_title' do
     it "returns a section of an article by finding its title" do
       sec = expurg.get_section_by_title('Test')
-      pars = ["hello", "I am a paragraph.", "Welcome to the paragraph zone."]
-
       expect(sec).to be(test_sec)
     end
   end
