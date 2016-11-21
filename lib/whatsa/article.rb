@@ -3,8 +3,8 @@ class Whatsa::Article
   attr_reader :contents, :title
 
   def initialize(noko_doc)
-    @contents = noko_doc.css('#mw-content-text').children
     @title = noko_doc.css('h1').text
+    @contents = noko_doc.css('#mw-content-text').children
     @sections = make_sections
   end
 
