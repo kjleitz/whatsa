@@ -3,14 +3,10 @@ class Whatsa::Article
   attr_reader :contents, :title
 
   def initialize(noko_doc)
-    @page = noko_doc
     @contents = noko_doc.css('#mw-content-text').children
     @title = noko_doc.css('h1').text
-    # @contents = make_contents
-  end
-
-  def make_contents
-
+    @sections = []
+    make_sections
   end
 
   def intro_pars
@@ -37,13 +33,6 @@ class Whatsa::Article
   end
 
   # private
-
-  # making the getter private; directly looking at the nokogiri document is a job
-  # for the Scraper class... the Article class is for handling the article as an
-  # abstract-ish concept
-  def page
-    @page
-  end
 
   def section_indices
     indices = []
