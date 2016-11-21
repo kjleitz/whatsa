@@ -20,6 +20,8 @@ Enter `whatsa` in a terminal. It will ask you what you'd like to learn about, an
 
 May or may not use the `summarize` ruby gem when all is said and done, instead of using the first paragraph. Might be a pain to install, though, so I'm keeping it simple.
 
+Remove citation numbers in brackets.
+
 ## So what's yer structure, bucko?
 
 Well, let's see.
