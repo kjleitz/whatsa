@@ -21,13 +21,17 @@ class Whatsa::Article
     intro_pars.first
   end
 
+  def section_titles
+    self.sections.map { |s| s.title }
+  end
+
   private
 
   def make_sections
     indices = section_indices
     indices << -1
     indices.each_cons(2) do |i, j|
-      title = self.contents[i].text
+      title = self.contents[i].text.gsub('[edit]', '').strip
       par_nodes = self.contents[i...j].select { |e| e.name == 'p' && e.text != "" }
       pars = par_nodes.map { |par| par.text }
       self.sections << Whatsa::Section.new(title, pars)
