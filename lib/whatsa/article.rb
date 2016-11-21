@@ -16,13 +16,16 @@ class Whatsa::Article
   end
 
   def summary
-    # this may go... might want to make the intro paragraphs their own
-    # section object
+    # I might want to make the intro paragraphs their own section, we'll see.
     intro_pars.first
   end
 
   def section_titles
     self.sections.map { |s| s.title }
+  end
+
+  def get_section_by_title(title)
+    self.sections.find { |s| s.title == title }
   end
 
   private
