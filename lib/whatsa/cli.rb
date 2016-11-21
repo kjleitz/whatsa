@@ -17,11 +17,13 @@ class Whatsa::CLI
 
   def ask
     puts "What would you like to know about?"
-    gets.strip
+    gets_command
   end
 
-  def input_wrapper(input)
+  def gets_command
+    input = nil
     loop do
+      input = gets.strip
       case input
       when ""
         puts "Please enter a valid input."
@@ -49,18 +51,19 @@ class Whatsa::CLI
     welcome
     instructions
     loop do
-      input = input_wrapper(ask)
+      input = gets_command
       scraper = Whatsa::Scraper.new(input)
       if scraper.not_found?
         puts "Hmmm... I don't know what '#{input}' means! Try something else."
       elsif scraper.disambig?
         dmb = scraper.make_disambig
         display_dmb(dmb)
-        choice = input_wrapper(gets.strip)
+        choice = gets_command
         article = dmb.choose_article(choice)
       else
         article = scraper.make_article
       end
+      puts article.summary
     end
   end
 
