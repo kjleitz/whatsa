@@ -27,7 +27,9 @@ class Whatsa::Disambig
   def make_descriptions
     self.items.inject({}) do |memo, item|
       unless item.css('a').empty?
-        memo[item.css('a').first.text] = item.text.split("\n").first.strip
+        key = item.css('a').first.text
+        desc = item.text.split("\n").first.strip
+        memo[key] = desc.gsub(key, "").gsub(/\A\W*/, "")
       end
       memo
     end
