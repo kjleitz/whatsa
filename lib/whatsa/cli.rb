@@ -33,6 +33,7 @@ class Whatsa::CLI
         break
       end
     end
+    input
   end
 
   def run
