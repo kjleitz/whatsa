@@ -8,6 +8,10 @@ class Whatsa::Disambig
     @descriptions = make_descriptions
   end
 
+  def choices
+    self.descriptions.keys
+  end
+
   private
 
   # make a hash with links and their descriptions
