@@ -89,7 +89,7 @@ describe "Whatsa::Scraper" do
       expect(poop.make_disambig).to be_a(Whatsa::Disambig)
     end
 
-    it "returns 'nil' for searches that did go to a disambiguation page" do
+    it "returns 'nil' for searches that do not go to a disambiguation" do
       expect(feces.make_disambig).to be_nil
       expect(jiggly.make_disambig).to be_nil
       expect(gg.make_disambig).to be_nil
