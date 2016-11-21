@@ -47,6 +47,19 @@ class Whatsa::CLI
     puts "\nPlease select a choice, either by name or number."
   end
 
+  def summary_helpline
+    puts "_______________________________________________________________"
+    puts "(type 'more' for a potentially longer summary, 'other' if you'd"
+    puts "like to select a specific category of information on the topic,"
+    puts "          or 'new' to find out about something else)"
+  end
+
+  def full_text_helpline
+    puts "____________________________________________________________________"
+    puts "   (type 'other' if you'd like to select a specific category of"
+    puts "information on the topic, or 'new' to find out about something else)"
+  end
+
   def run
     welcome
     instructions
@@ -65,15 +78,18 @@ class Whatsa::CLI
       end
       system("clear")
       puts article.summary
-      puts "_______________________________________________________________"
-      puts "(type 'more' for a potentially longer summary, 'other' if you'd"
-      puts "like to select a specific category of information on the topic,"
-      puts "or 'new' to find out about something else)"
+      summary_helpline
       input = gets_command
       case input
       when "more"
         system("clear")
         puts article.full_intro
+        full_text_helpline
+        # need to get input here. if you set it to 'input', will it
+        # continue the case?
+      when "other"
+        # list categories
+      end
     end
   end
 
