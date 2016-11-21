@@ -30,7 +30,16 @@ class Whatsa::Scraper
   end
 
   def make_article
-
+    if article?
+      Whatsa::Article.new(self.page)
+    elsif results_page? && !not_found?
+      first_title = self.page.css('.mw-search-results li a').first.text
+      self.class.new(first_title).make_article
+    elsif disambig?
+      # maybe make_disambig, then links.first or however it ends up
+    else
+      nil
+    end
   end
 
   def make_disambig
