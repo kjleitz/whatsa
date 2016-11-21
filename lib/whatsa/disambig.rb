@@ -13,10 +13,9 @@ class Whatsa::Disambig
   end
 
   def choose_article(choice)
-    case choice
-    when Fixnum
-      Whatsa::Scraper.new(choices[choice - 1]).make_article
-    when String
+    if choice.to_i > 0
+      Whatsa::Scraper.new(choices[choice.to_i - 1]).make_article
+    else
       Whatsa::Scraper.new(choice).make_article
     end
   end
