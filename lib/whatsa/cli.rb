@@ -20,29 +20,35 @@ class Whatsa::CLI
     gets.strip
   end
 
+  def input_wrapper(input)
+    loop do
+      case input
+      when ""
+        puts "Please enter a valid input."
+      when "exit"
+        exit
+      when "help"
+        instructions
+      else
+        break
+      end
+    end
+  end
+
   def run
     welcome
     instructions
     loop do
-      input = ask
-      case input
-      when ""
-        puts "Please enter a word or phrase."
-      when "exit"
-        break
-      when "help"
-        instructions
-      else
-        scraper = Whatsa::Scraper.new(input)
-        if scraper.disambig?
-          dmb = scraper.make_disambig
-          puts "Hmmm... #{input} could mean a few different things:\n"
-          dmb.descriptions.each_with_index do |kvp, i|
-            puts "#{i + 1}) #{kvp[0].to_s} - #{kvp[1]}"
-          end
-          puts "\nPlease select a choice either by name or number."
-          choice = gets.strip
+      input = input_wrapper(ask)
+      scraper = Whatsa::Scraper.new(input)
+      if scraper.disambig?
+        dmb = scraper.make_disambig
+        puts "Hmmm... #{input} could mean a few different things:\n"
+        dmb.descriptions.each_with_index do |kvp, i|
+          puts "#{i + 1}) #{kvp[0].to_s} - #{kvp[1]}"
         end
+        puts "\nPlease select a choice either by name or number."
+        choice = input_wrapper(gets.strip)
       end
     end
   end
