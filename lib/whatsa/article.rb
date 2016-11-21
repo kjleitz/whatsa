@@ -14,7 +14,8 @@ class Whatsa::Article
 
   def intro_pars
     breakpoint = self.contents.to_a.index { |element| element.name == 'h2' }
-    self.contents[0...breakpoint].css('p').map { |par| par.text }
+    pars = self.contents[0...breakpoint].css('p').map { |par| par.text }
+    pars.reject { |par| par == "" }
   end
 
   def summary
