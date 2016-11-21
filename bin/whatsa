@@ -1,5 +1,5 @@
-#!usr/bin/env ruby
+#!/usr/bin/env ruby
 
 require_relative '../lib/whatsa'
 
-Whatsa::CLI.new.call
+Whatsa::CLI.new.run
