@@ -1,4 +1,5 @@
 class Whatsa::Article
+  attr_accessor :sections
   attr_reader :contents, :title
 
   def initialize(noko_doc)
@@ -25,10 +26,17 @@ class Whatsa::Article
   end
 
   def make_sections
-
+    indices = section_indices
+    indices << -1
+    indices.each_cons(2) do |i, j|
+      title = self.contents[i].text
+      par_nodes = self.contents[i...j].select { |e| e.name == 'p' && e.text != "" }
+      pars = par_nodes.map { |par| par.text }
+      self.sections << Section.new(title, pars)
+    end
   end
 
-  private
+  # private
 
   # making the getter private; directly looking at the nokogiri document is a job
   # for the Scraper class... the Article class is for handling the article as an
