@@ -36,9 +36,8 @@ class Whatsa::CLI
     input
   end
 
-  def display_dmb(scraper)
-    raise TypeError unless scraper.is_a?(Whatsa::Scraper)
-    dmb = scraper.make_disambig
+  def display_dmb(dmb)
+    raise TypeError unless dmb.is_a?(Whatsa::Disambig)
     puts "Hmmm... #{dmb.title} could mean a few different things:\n"
     dmb.descriptions.each_with_index do |kvp, i|
       puts "#{i + 1}) #{kvp[0].to_s} - #{kvp[1]}"
@@ -53,8 +52,11 @@ class Whatsa::CLI
       input = input_wrapper(ask)
       scraper = Whatsa::Scraper.new(input)
       if scraper.disambig?
-        display_dmb
+        dmb = scraper.make_disambig
+        display_dmb(dmb)
         choice = input_wrapper(gets.strip)
+        article = dmb.choose(choice)
+      # else if it's an article do article stuff, take article from dmb obviously too
       end
     end
   end
