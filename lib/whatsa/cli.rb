@@ -36,6 +36,16 @@ class Whatsa::CLI
     input
   end
 
+  def display_dmb(scraper)
+    raise TypeError unless scraper.is_a?(Whatsa::Scraper)
+    dmb = scraper.make_disambig
+    puts "Hmmm... #{dmb.title} could mean a few different things:\n"
+    dmb.descriptions.each_with_index do |kvp, i|
+      puts "#{i + 1}) #{kvp[0].to_s} - #{kvp[1]}"
+    end
+    puts "\nPlease select a choice either by name or number."
+  end
+
   def run
     welcome
     instructions
@@ -43,12 +53,7 @@ class Whatsa::CLI
       input = input_wrapper(ask)
       scraper = Whatsa::Scraper.new(input)
       if scraper.disambig?
-        dmb = scraper.make_disambig
-        puts "Hmmm... #{input} could mean a few different things:\n"
-        dmb.descriptions.each_with_index do |kvp, i|
-          puts "#{i + 1}) #{kvp[0].to_s} - #{kvp[1]}"
-        end
-        puts "\nPlease select a choice either by name or number."
+        display_dmb
         choice = input_wrapper(gets.strip)
       end
     end
