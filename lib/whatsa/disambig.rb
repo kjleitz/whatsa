@@ -29,7 +29,7 @@ class Whatsa::Disambig
       unless item.css('a').empty?
         key = item.css('a').first.text
         desc = item.text.split("\n").first.strip
-        memo[key] = desc.gsub(key, "").gsub(/\A\W*/, "")
+        memo[key] = desc.gsub(key, "").gsub(/\A[^\w"]/, "").strip
       end
       memo
     end
