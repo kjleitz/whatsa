@@ -2,10 +2,16 @@ require_relative 'spec_helper'
 
 describe 'Whatsa::Article' do
 
+  let(:test_sec) do
+    pars = ["hello", "I am a paragraph.", "Welcome to the paragraph zone."]
+    Whatsa::Section.new('Test', pars)
+  end
   # Does this get cached between tests? Or am I sending rapid requests?
   let(:expurg) do
     doc = Nokogiri::HTML(open('https://en.wikipedia.org/wiki/Expurgation'))
-    Whatsa::Article.new(doc)
+    art = Whatsa::Article.new(doc)
+    art.sections << test_sec
+    art
   end
 
   it "has a title and contents" do
@@ -23,7 +29,6 @@ describe 'Whatsa::Article' do
       ]
 
       expect(expurg.intro_pars).to match_array(intros)
-
     end
   end
 
@@ -33,14 +38,22 @@ describe 'Whatsa::Article' do
       intro = "Expurgation is a form of censorship which involves purging anything deemed noxious or offensive, usually from an artistic work."
 
       expect(expurg.summary).to eq(intro)
-
     end
   end
 
   describe '#section_titles' do
     it "returns a list of the section titles" do
-      titles = ["Examples", "See also", "References"]
+      titles = ["Examples", "See also", "References", "Test"]
       expect(expurg.section_titles).to match_array(titles)
+    end
+  end
+
+  describe '#get_section_by_title' do
+    it "returns a section of an article by finding its title" do
+      sec = expurg.get_section_by_title('Test')
+      pars = ["hello", "I am a paragraph.", "Welcome to the paragraph zone."]
+
+      expect(sec).to be(test_sec)
     end
   end
 
