@@ -37,4 +37,11 @@ describe 'Whatsa::Article' do
     end
   end
 
+  describe '#section_titles' do
+    it "returns a list of the section titles" do
+      titles = ["Examples", "See also", "References"]
+      expect(expurg.section_titles).to match_array(titles)
+    end
+  end
+
 end
