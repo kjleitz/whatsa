@@ -21,6 +21,8 @@ class Whatsa::Article
     intro_pars.first
   end
 
+  private
+
   def make_sections
     indices = section_indices
     indices << -1
@@ -31,8 +33,6 @@ class Whatsa::Article
       self.sections << Whatsa::Section.new(title, pars)
     end
   end
-
-  # private
 
   def section_indices
     indices = []
