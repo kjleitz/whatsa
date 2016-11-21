@@ -2,6 +2,7 @@ require_relative 'spec_helper'
 
 describe "Whatsa::Scraper" do
 
+  # Do these let statements jackhammer Wikipedia? Or are they cached?
   let(:feces) {Whatsa::Scraper.new('feces')}
   let(:poop) {Whatsa::Scraper.new('poop')}
   let(:jiggly) {Whatsa::Scraper.new('jiggly')}
@@ -60,8 +61,6 @@ describe "Whatsa::Scraper" do
       expect(poop.disambig?).to be(true)
       expect(jiggly.disambig?).to be(false)
       expect(gg.disambig?).to be(false)
-
-      poop.disambig?.should be_a(TrueClass)
     end
   end
 
