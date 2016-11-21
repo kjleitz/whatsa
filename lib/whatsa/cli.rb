@@ -40,7 +40,7 @@ class Whatsa::CLI
     raise TypeError unless dmb.is_a?(Whatsa::Disambig)
     puts "Hmmm... #{dmb.title} could mean a few different things:\n"
     dmb.descriptions.each_with_index do |kvp, i|
-      puts "#{i + 1}) #{kvp[0].to_s} - #{kvp[1]}"
+      puts "#{i + 1}) #{kvp[0].to_s} (#{kvp[1]})"
     end
     puts "\nPlease select a choice either by name or number."
   end
@@ -51,12 +51,15 @@ class Whatsa::CLI
     loop do
       input = input_wrapper(ask)
       scraper = Whatsa::Scraper.new(input)
-      if scraper.disambig?
+      if scraper.not_found?
+        puts "Hmmm... I don't know what '#{input}' means! Try something else."
+      elsif scraper.disambig?
         dmb = scraper.make_disambig
         display_dmb(dmb)
         choice = input_wrapper(gets.strip)
-        article = dmb.choose(choice)
-      # else if it's an article do article stuff, take article from dmb obviously too
+        article = dmb.choose_article(choice)
+      else
+        article = scraper.make_article
       end
     end
   end
