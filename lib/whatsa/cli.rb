@@ -36,10 +36,13 @@ class Whatsa::CLI
         scraper = Whatsa::Scraper.new(input)
         if scraper.disambig?
           dmb = scraper.make_disambig
-          puts "Hmmm... #{input} could mean a few different things:"
-          dmb.descriptions.each do |key, val|
-            
+          puts "Hmmm... #{input} could mean a few different things:\n"
+          dmb.descriptions.each_with_index do |kvp, i|
+            puts "#{i + 1}) #{kvp[0].to_s} - #{kvp[1]}"
           end
+          puts "\nPlease select a choice either by name or number."
+          choice = gets.strip
+        end
       end
     end
   end
