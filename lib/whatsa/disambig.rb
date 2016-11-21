@@ -12,6 +12,15 @@ class Whatsa::Disambig
     self.descriptions.keys
   end
 
+  def choose(choice)
+    case choice
+    when Fixnum
+      Whatsa::Scraper.new(choices[choice - 1]).make_article
+    when String
+      Whatsa::Scraper.new(choice).make_article
+    end
+  end
+
   private
 
   # make a hash with links and their descriptions
