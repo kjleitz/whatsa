@@ -28,7 +28,7 @@ class Whatsa::Article
       title = self.contents[i].text
       par_nodes = self.contents[i...j].select { |e| e.name == 'p' && e.text != "" }
       pars = par_nodes.map { |par| par.text }
-      self.sections << Section.new(title, pars)
+      self.sections << Whatsa::Section.new(title, pars)
     end
   end
 
