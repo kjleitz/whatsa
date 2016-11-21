@@ -63,7 +63,17 @@ class Whatsa::CLI
       else
         article = scraper.make_article
       end
+      system("clear")
       puts article.summary
+      puts "_______________________________________________________________"
+      puts "(type 'more' for a potentially longer summary, 'other' if you'd"
+      puts "like to select a specific category of information on the topic,"
+      puts "or 'new' to find out about something else)"
+      input = gets_command
+      case input
+      when "more"
+        system("clear")
+        puts article.full_intro
     end
   end
 
