@@ -14,6 +14,10 @@ class Whatsa::Article
     pars.reject { |par| par == "" }
   end
 
+  def full_intro
+    intro_pars.join("\n\n")
+  end
+
   def summary
     # I might want to make the intro paragraphs their own section, we'll see.
     intro_pars.first
