@@ -12,7 +12,7 @@ class Whatsa::Disambig
     self.descriptions.keys
   end
 
-  def choose(choice)
+  def choose_article(choice)
     case choice
     when Fixnum
       Whatsa::Scraper.new(choices[choice - 1]).make_article
