@@ -21,3 +21,7 @@ If you would like a longer explanation, type `more`.
 If you would like to select a category of information about the topic, type `other`, then select a choice by its name or number.
 
 If you'd like to search for something else, type `new`.
+
+## Dependencies
+
+Requires `open-uri` and `nokogiri`.
