@@ -24,6 +24,10 @@ Remove citation numbers in brackets.
 
 Make stuff private if there's no reason for the API to access it.
 
+Remove '(disambiguation)' from title of disambig pages.
+
+Remove table of contents list items from disambig pages.
+
 ## So what's yer structure, bucko?
 
 Well, let's see.
