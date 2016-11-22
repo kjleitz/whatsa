@@ -1,6 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
-require 'pry'
+# require 'pry'
 
 require_relative '../lib/whatsa/version'
 require_relative '../lib/whatsa/cli'
