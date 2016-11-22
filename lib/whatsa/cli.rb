@@ -44,7 +44,8 @@ class Whatsa::CLI
   def display_dmb(dmb)
     raise TypeError unless dmb.is_a?(Whatsa::Disambig)
     system("clear")
-    puts "Hmmm... #{dmb.title} could mean a few different things:\n"
+    stripped_title = dmb.title.gsub("(disambiguation)", "").strip
+    puts "Hmmm... #{stripped_title} could mean a few different things:\n"
     dmb.descriptions.each_with_index do |kvp, i|
       puts "#{i + 1}. #{kvp[0].to_s} (#{kvp[1]})"
     end
@@ -77,7 +78,8 @@ class Whatsa::CLI
     choice = nil
     loop do
       choice = gets_command
-      break if disambig.choices.detect { |c| c.downcase == choice.downcase }
+      in_choices = disambig.choices.detect { |c| c.downcase == choice.downcase }
+      break if in_choices || choice.to_i > 0
     end
     disambig.choose_article(choice)
   end
