@@ -4,6 +4,7 @@ class Whatsa::Section
   def initialize(title, paragraphs)
     @title = title
     @paragraphs = paragraphs
+    remove_citations
   end
 
   def summary
@@ -12,6 +13,12 @@ class Whatsa::Section
 
   def full_text
     self.paragraphs.join("\n\n")
+  end
+
+  def remove_citations
+    self.paragraphs.map do |par|
+      par.gsub(/\[\d+\]/, "")
+    end
   end
 
 end
