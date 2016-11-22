@@ -86,8 +86,8 @@ class Whatsa::CLI
     gets_command
   end
 
-  def choose_category
-    display_sections
+  def categories(article)
+    display_sections(article)
     choice = gets_command
     section = article.choose_section(choice)
     summarize(section)
@@ -97,12 +97,9 @@ class Whatsa::CLI
     welcome
     instructions
     loop do
-      ask
-
       # get a search term
-      input = gets_command
+      input = ask
       scraper = Whatsa::Scraper.new(input)
-
       # get an article from the search, or restart the loop if it can't be found
       if scraper.not_found?
         puts "Hmmm... I don't know what '#{input}' means! Try something else."
@@ -122,8 +119,9 @@ class Whatsa::CLI
       # the only valid input here that would go uncaught is "other", so
       # keep asking until you get a caught input (logic determined by
       # #gets_command, e.g. "help", "exit", "new") or "other"
-      loop { input = input.downcase == "other" ? choose_category : gets_command }
-
+      loop do
+        input = input.downcase == "other" ? categories(article) : gets_command
+      end
     end
   end
 end
