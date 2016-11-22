@@ -28,7 +28,15 @@ class Whatsa::Article
   end
 
   def get_section_by_title(title)
-    self.sections.find { |s| s.title == title }
+    self.sections.find { |s| s.title.downcase == title.downcase }
+  end
+
+  def choose_section(choice)
+    if choice.to_i > 0
+      self.sections[choice.to_i - 1]
+    else
+      get_section_by_title(title)
+    end
   end
 
   private

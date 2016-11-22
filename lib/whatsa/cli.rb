@@ -98,8 +98,21 @@ class Whatsa::CLI
         # continue the case?
       when "other"
         # list categories
-        display_sections
+        display_sections(article)
+        choice = gets_command
+        section = article.choose_section(choice)
+        system("clear")
+        puts section.summary
+        summary_helpline
         input = gets_command
+        case input
+        when "more"
+          system("clear")
+          puts section.full_text
+          full_text_helpline
+        when "other"
+          # list categories again
+        end
       end
     end
   end
