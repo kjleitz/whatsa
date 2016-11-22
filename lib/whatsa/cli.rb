@@ -48,11 +48,11 @@ class Whatsa::CLI
     puts "\nPlease select a choice, either by name or number."
   end
 
-  def display_sections(article)
-    raise TypeError unless article.is_a?(Whatsa::Article)
+  def display_sections(text)
+    text = text.article if text.is_a?(Whatsa::Section)
     system("clear")
-    puts "Here are some specific subjects about '#{article.title}':\n"
-    article.section_titles.each_with_index {|title, i| puts "#{i + 1}. #{title}"}
+    puts "Here are some specific subjects about '#{text.title}':\n"
+    text.section_titles.each_with_index {|title, i| puts "#{i + 1}. #{title}"}
     puts "\nPlease select a choice, either by name or number."
   end
 
@@ -67,6 +67,21 @@ class Whatsa::CLI
     puts "____________________________________________________________________"
     puts "   (type 'other' if you'd like to select a specific category of"
     puts "information on the topic, or 'new' to find out about something else)"
+  end
+
+  def summarize(text)
+    system("clear")
+    puts text.summary
+    summary_helpline
+    input = gets_command
+    full(text) if input.downcase == "more"
+  end
+
+  def full(text)
+    system("clear")
+    puts text.full_text
+    full_text_helpline
+    gets_command
   end
 
   def run
@@ -92,7 +107,7 @@ class Whatsa::CLI
       case input
       when "more"
         system("clear")
-        puts article.full_intro
+        puts article.full_text
         full_text_helpline
         # need to get input here. if you set it to 'input', will it
         # continue the case?
