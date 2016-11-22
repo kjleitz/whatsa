@@ -27,8 +27,13 @@ class Whatsa::Disambig
     self.items.inject({}) do |memo, item|
       unless item.css('a').empty?
         key = item.css('a').first.text
-        desc = item.text.split("\n").first.strip
-        memo[key] = desc.gsub(key, "").gsub(/\A[^\w"]/, "").strip
+        toc_link = item["class"] && item["class"].match(/toc/)
+        dmb_link = key.match("(disambiguation)")
+        all_link = key.match("All pages with titles")
+        unless toc_link || dmb_link || all_link
+          desc = item.text.split("\n").first.strip
+          memo[key] = desc.gsub(key, "").gsub(/\A[^\w"]/, "").strip
+        end
       end
       memo
     end
