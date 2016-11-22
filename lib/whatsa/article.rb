@@ -8,10 +8,8 @@ class Whatsa::Article
     @sections = make_sections
   end
 
-  def intro_pars
-    breakpoint = self.contents.to_a.index { |element| element.name == 'h2' }
-    pars = self.contents[0...breakpoint].css('p').map { |par| par.text }
-    pars.reject { |par| par == "" }
+  def summary
+    self.sections.first.summary
   end
 
   def full_text
@@ -21,16 +19,8 @@ class Whatsa::Article
     self.sections.first.full_text
   end
 
-  def summary
-    self.sections.first.summary
-  end
-
   def section_titles
     self.sections.map { |s| s.title }
-  end
-
-  def get_section_by_title(title)
-    self.sections.find { |s| s.title.downcase == title.downcase }
   end
 
   def choose_section(choice)
@@ -42,6 +32,16 @@ class Whatsa::Article
   end
 
   private
+
+  def get_section_by_title(title)
+    self.sections.find { |s| s.title.downcase == title.downcase }
+  end
+
+  def intro_pars
+    breakpoint = self.contents.to_a.index { |element| element.name == 'h2' }
+    pars = self.contents[0...breakpoint].css('p').map { |par| par.text }
+    pars.reject { |par| par == "" }
+  end
 
   def make_sections
     indices = section_indices
