@@ -18,12 +18,11 @@ class Whatsa::Article
     # name might be a little confusing: it's not really the "full text" of the
     # article, it's the full text of the article summary. I'm naming it #full_text
     # for duck-typing reasons
-    intro_pars.join("\n\n")
+    self.sections.first.full_text
   end
 
   def summary
-    # I might want to make the intro paragraphs their own section, we'll see.
-    intro_pars.first
+    self.sections.first.summary
   end
 
   def section_titles
@@ -47,7 +46,7 @@ class Whatsa::Article
   def make_sections
     indices = section_indices
     indices << -1
-    secs = []
+    secs = [Whatsa::Section.new("#{self.title} - Introduction", intro_pars)]
     indices.each_cons(2) do |i, j|
       title = self.contents[i].text.gsub('[edit]', '').strip
       par_nodes = self.contents[i...j].select { |e| e.name == 'p' && e.text != "" }
