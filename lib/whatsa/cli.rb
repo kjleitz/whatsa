@@ -40,10 +40,19 @@ class Whatsa::CLI
 
   def display_dmb(dmb)
     raise TypeError unless dmb.is_a?(Whatsa::Disambig)
+    system("clear")
     puts "Hmmm... #{dmb.title} could mean a few different things:\n"
     dmb.descriptions.each_with_index do |kvp, i|
       puts "#{i + 1}. #{kvp[0].to_s} (#{kvp[1]})"
     end
+    puts "\nPlease select a choice, either by name or number."
+  end
+
+  def display_sections(article)
+    raise TypeError unless article.is_a?(Whatsa::Article)
+    system("clear")
+    puts "Here are some specific subjects about '#{article.title}':\n"
+    article.section_titles.each_with_index {|title, i| puts "#{i + 1}. #{title}"}
     puts "\nPlease select a choice, either by name or number."
   end
 
@@ -89,6 +98,8 @@ class Whatsa::CLI
         # continue the case?
       when "other"
         # list categories
+        display_sections
+        input = gets_command
       end
     end
   end
