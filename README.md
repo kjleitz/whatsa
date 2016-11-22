@@ -22,6 +22,8 @@ May or may not use the `summarize` ruby gem when all is said and done, instead o
 
 Remove citation numbers in brackets.
 
+Make stuff private if there's no reason for the API to access it.
+
 ## So what's yer structure, bucko?
 
 Well, let's see.
