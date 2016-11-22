@@ -15,6 +15,8 @@ class Whatsa::Section
     self.paragraphs.join("\n\n")
   end
 
+  private
+
   def remove_citations
     self.paragraphs.map! do |par|
       par.gsub(/\[\d+\]/, "")
