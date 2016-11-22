@@ -14,7 +14,10 @@ class Whatsa::Article
     pars.reject { |par| par == "" }
   end
 
-  def full_intro
+  def full_text
+    # name might be a little confusing: it's not really the "full text" of the
+    # article, it's the full text of the article summary. I'm naming it #full_text
+    # for duck-typing reasons
     intro_pars.join("\n\n")
   end
 
@@ -49,7 +52,7 @@ class Whatsa::Article
       title = self.contents[i].text.gsub('[edit]', '').strip
       par_nodes = self.contents[i...j].select { |e| e.name == 'p' && e.text != "" }
       pars = par_nodes.map { |par| par.text }
-      secs << Whatsa::Section.new(title, pars)
+      secs << Whatsa::Section.new(title, pars).tap { |s| s.article = self }
     end
     secs
   end
