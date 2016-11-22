@@ -71,6 +71,12 @@ class Whatsa::CLI
     puts "information on the topic, or 'new' to find out about something else)"
   end
 
+  def get_dmb_choice(disambig)
+    display_dmb(disambig)
+    choice = gets_command
+    disambig.choose_article(choice)
+  end
+
   def summarize(text)
     system("clear")
     puts text.summary
@@ -96,19 +102,18 @@ class Whatsa::CLI
   def run
     welcome
     instructions
+
     loop do
       # get a search term
       input = ask
       scraper = Whatsa::Scraper.new(input)
+
       # get an article from the search, or restart the loop if it can't be found
       if scraper.not_found?
         puts "Hmmm... I don't know what '#{input}' means! Try something else."
         next
       elsif scraper.disambig?
-        dmb = scraper.make_disambig
-        display_dmb(dmb)
-        choice = gets_command
-        article = dmb.choose_article(choice)
+        article = get_dmb_choice(scraper.make_disambig)
       else
         article = scraper.make_article
       end
@@ -119,9 +124,7 @@ class Whatsa::CLI
       # the only valid input here that would go uncaught is "other", so
       # keep asking until you get a caught input (logic determined by
       # #gets_command, e.g. "help", "exit", "new") or "other"
-      loop do
-        input = input.downcase == "other" ? categories(article) : gets_command
-      end
+      loop {input = input.downcase == "other" ? categories(article) : gets_command}
     end
   end
 end
