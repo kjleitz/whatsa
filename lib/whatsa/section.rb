@@ -1,5 +1,5 @@
 class Whatsa::Section
-  attr_accessor :title, :paragraphs
+  attr_accessor :title, :paragraphs, :article
 
   def initialize(title, paragraphs)
     @title = title
