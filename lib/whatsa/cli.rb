@@ -74,7 +74,7 @@ class Whatsa::CLI
     puts text.summary
     summary_helpline
     input = gets_command
-    full(text) if input.downcase == "more"
+    input.downcase == "more" ? full(text) : input
   end
 
   def full(text)
@@ -84,10 +84,18 @@ class Whatsa::CLI
     gets_command
   end
 
+  def choose_category
+    display_sections
+    choice = gets_command
+    section = article.choose_section(choice)
+    summarize(section)
+  end
+
   def run
     welcome
     instructions
     loop do
+      ask
       input = gets_command
       scraper = Whatsa::Scraper.new(input)
       if scraper.not_found?
@@ -100,35 +108,11 @@ class Whatsa::CLI
       else
         article = scraper.make_article
       end
-      system("clear")
-      puts article.summary
-      summary_helpline
-      input = gets_command
-      case input
-      when "more"
-        system("clear")
-        puts article.full_text
-        full_text_helpline
-        # need to get input here. if you set it to 'input', will it
-        # continue the case?
-      when "other"
-        # list categories
-        display_sections(article)
-        choice = gets_command
-        section = article.choose_section(choice)
-        system("clear")
-        puts section.summary
-        summary_helpline
-        input = gets_command
-        case input
-        when "more"
-          system("clear")
-          puts section.full_text
-          full_text_helpline
-        when "other"
-          # list categories again
-        end
+      input = summarize(article)
+      while input.downcase == "other"
+        input = choose_category
       end
+      system("clear")
     end
   end
 
