@@ -31,6 +31,8 @@ class Whatsa::CLI
         exit
       when "help"
         instructions
+      when "new"
+        run
       else
         break
       end
@@ -96,10 +98,15 @@ class Whatsa::CLI
     instructions
     loop do
       ask
+
+      # get a search term
       input = gets_command
       scraper = Whatsa::Scraper.new(input)
+
+      # get an article from the search, or restart the loop if it can't be found
       if scraper.not_found?
         puts "Hmmm... I don't know what '#{input}' means! Try something else."
+        next
       elsif scraper.disambig?
         dmb = scraper.make_disambig
         display_dmb(dmb)
@@ -108,12 +115,15 @@ class Whatsa::CLI
       else
         article = scraper.make_article
       end
+
+      # summarize that article
       input = summarize(article)
-      while input.downcase == "other"
-        input = choose_category
-      end
-      system("clear")
+
+      # the only valid input here that would go uncaught is "other", so
+      # keep asking until you get a caught input (logic determined by
+      # #gets_command, e.g. "help", "exit", "new") or "other"
+      loop { input = input.downcase == "other" ? choose_category : gets_command }
+
     end
   end
-
 end
