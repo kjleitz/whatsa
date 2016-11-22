@@ -23,6 +23,7 @@ class Whatsa::CLI
   def gets_command
     input = nil
     loop do
+      print "> "
       input = gets.strip
       case input
       when ""
@@ -73,7 +74,11 @@ class Whatsa::CLI
 
   def get_dmb_choice(disambig)
     display_dmb(disambig)
-    choice = gets_command
+    choice = nil
+    loop do
+      choice = gets_command
+      break if disambig.choices.detect { |c| c.downcase == choice.downcase }
+    end
     disambig.choose_article(choice)
   end
 
