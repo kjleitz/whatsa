@@ -61,16 +61,16 @@ class Whatsa::CLI
   end
 
   def summary_helpline
-    puts "_______________________________________________________________"
-    puts "(type 'more' for a potentially longer summary, 'other' if you'd"
-    puts "like to select a specific category of information on the topic,"
-    puts "          or 'new' to find out about something else)"
+    puts "   _______________________________________________________________"
+    puts "   (type 'more' for a potentially longer summary, 'other' if you'd"
+    puts "   like to select a specific category of information on the topic,"
+    puts "             or 'new' to find out about something else)"
   end
 
   def full_text_helpline
-    puts "____________________________________________________________________"
-    puts "   (type 'other' if you'd like to select a specific category of"
-    puts "information on the topic, or 'new' to find out about something else)"
+    puts "   _______________________________________________________________"
+    puts "    (type 'other' if you'd like to select a specific category of"
+    puts " information on the topic, or 'new' to find out about something else)"
   end
 
   def get_dmb_choice(disambig)
