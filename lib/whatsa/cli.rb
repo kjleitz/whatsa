@@ -41,6 +41,21 @@ class Whatsa::CLI
     input
   end
 
+  def word_wrap(text)
+    count = 0
+    words = text.split(/ /)
+    words.each_with_index do |word, index|
+      count += word.length + 1
+      if count > 80
+        words.insert(index, "\n")
+        count = 0
+      elsif word.index("\n")
+        count = word.length
+      end
+    end
+    words.join(" ").gsub(/^ /, "")
+  end
+
   def display_dmb(dmb)
     raise TypeError unless dmb.is_a?(Whatsa::Disambig)
     system("clear")
@@ -86,7 +101,7 @@ class Whatsa::CLI
 
   def summarize(text)
     system("clear")
-    puts text.summary
+    puts word_wrap(text.summary)
     summary_helpline
     input = gets_command
     input.downcase == "more" ? full(text) : input
@@ -94,7 +109,7 @@ class Whatsa::CLI
 
   def full(text)
     system("clear")
-    puts text.full_text
+    puts word_wrap(text.full_text)
     full_text_helpline
     gets_command
   end
