@@ -16,9 +16,21 @@ Simple?
 
 Simple!
 
+## Installing Whatsa
+
+```
+userloser@lappytoppy:~$ gem install whatsa
+```
+
+Simple as pie.
+
 ## Using Whatsa
 
-Clone this repo, `cd` to the directory, run `bundle install` (assuming you've already installed bundler), then run the `bin/Whatsa` script in a terminal. It will ask you what you'd like to learn about, and you can enter a word or phrase.
+```
+userloser@lappytoppy:~$ whatsa
+```
+
+After you run this command, Whatsa will ask you what you'd like to learn about, and you can enter a word or phrase.
 
 If your search term could mean multiple things, it will let you know, and you can select a choice by its name or number.
 
@@ -27,10 +39,6 @@ If you would like a longer explanation, type `more`.
 If you would like to select a category of information about the topic, type `other`, then select a choice by its name or number.
 
 If you'd like to search for something else, type `new`.
-
-## Dependencies
-
-Requires Ruby 2.3.3 (doesn't seem to work with 2.0, at least, so see what you can get away with), the `nokogiri` gem, bundler (if you're planning on installing it the easy way), and `pry` (although it's really only in the gemspec for dev purposes).
 
 ## Contributing
 
