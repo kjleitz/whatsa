@@ -18,9 +18,7 @@ class Whatsa::Section
   private
 
   def remove_citations
-    self.paragraphs.map! do |par|
-      par.gsub(/\[\d+\]/, "")
-    end
+    self.paragraphs.map! { |par| par.gsub(/\[\d+\]/, "") }
   end
 
 end
