@@ -146,7 +146,7 @@ class Whatsa::CLI
       # the only valid input here that would go uncaught is "other", so
       # keep asking until you get a caught input (logic determined by
       # #gets_command, e.g. "help", "exit", "new") or "other"
-      loop {input = input.downcase == "other" ? categories(article) : gets_command}
+      loop { input = input.downcase == "other" ? categories(article) : gets_command }
     end
   end
 end
