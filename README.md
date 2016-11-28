@@ -1,4 +1,4 @@
-# whatsa
+# Whatsa
 
 ## The basics
 
@@ -16,9 +16,9 @@ Simple?
 
 Simple!
 
-## Using whatsa
+## Using Whatsa
 
-Clone this repo, `cd` to the directory, run `bundle install` (assuming you've already installed bundler), then run the `bin/whatsa` script in a terminal. It will ask you what you'd like to learn about, and you can enter a word or phrase.
+Clone this repo, `cd` to the directory, run `bundle install` (assuming you've already installed bundler), then run the `bin/Whatsa` script in a terminal. It will ask you what you'd like to learn about, and you can enter a word or phrase.
 
 If your search term could mean multiple things, it will let you know, and you can select a choice by its name or number.
 
@@ -34,7 +34,7 @@ Requires Ruby 2.3.3 (doesn't seem to work with 2.0, at least, so see what you ca
 
 ## Contributing
 
-Bug reports and pull requests for this project are welcome at its [GitHub page](https://github.com/kjleitz/whatsa). If you choose to contribute, please adhere to the [Ruby Community Conduct Guideline](https://www.ruby-lang.org/en/conduct/) so I don't have to go around breaking necks, running out of bubblegum, etc.
+Bug reports and pull requests for this project are welcome at its [GitHub page](https://github.com/kjleitz/Whatsa). If you choose to contribute, please adhere to the [Ruby Community Conduct Guideline](https://www.ruby-lang.org/en/conduct/) so I don't have to go around breaking necks, running out of bubblegum, etc.
 
 ## License
 
