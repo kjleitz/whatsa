@@ -16,6 +16,10 @@ Simple?
 
 Simple!
 
+### No, but like, _how_ does it do that?
+
+You can find a little more information in a blog post I made [here](http://cogsandcurves.com/2016/11/28/so_you_made_a_cli_data_gem_eh/)!
+
 ## Installing Whatsa
 
 ```
