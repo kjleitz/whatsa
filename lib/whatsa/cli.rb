@@ -124,28 +124,27 @@ class Whatsa::CLI
     welcome
     instructions
 
-    loop do
-      # get a search term
-      input = ask
-      scraper = Whatsa::Scraper.new(input)
+    # get a search term
+    input = ask
+    scraper = Whatsa::Scraper.new(input)
 
-      # get an article from the search, or restart the loop if it can't be found
-      if scraper.not_found?
-        puts "Hmmm... I don't know what '#{input}' means! Try something else."
-        next
-      elsif scraper.disambig?
-        article = get_dmb_choice(scraper.make_disambig)
-      else
-        article = scraper.make_article
-      end
-
-      # summarize that article
-      input = summarize(article)
-
-      # the only valid input here that would go uncaught is "other", so
-      # keep asking until you get a caught input (logic determined by
-      # #gets_command, e.g. "help", "exit", "new") or "other"
-      loop { input = input == "other" ? summarize(get_sec_choice(article)) : gets_command }
+    # get an article from the search, or restart the loop if it can't be found
+    if scraper.not_found?
+      print "Hmmm... I don't know what '#{input}' means!\nPress 'enter' to try something else."
+      gets
+      run
+    elsif scraper.disambig?
+      article = get_dmb_choice(scraper.make_disambig)
+    else
+      article = scraper.make_article
     end
+
+    # summarize that article
+    input = summarize(article)
+
+    # the only valid input here that would go uncaught is "other", so
+    # keep asking until you get a caught input (logic determined by
+    # #gets_command, e.g. "help", "exit", "new") or "other"
+    loop { input = input == "other" ? summarize(get_sec_choice(article)) : gets_command }
   end
 end
