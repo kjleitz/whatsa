@@ -26,8 +26,6 @@ class Whatsa::CLI
       print "> "
       input = gets.strip
       case input
-      when ""
-        puts "Please enter a valid input."
       when "exit"
         exit
       when "help"
