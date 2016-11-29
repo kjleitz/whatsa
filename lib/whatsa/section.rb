@@ -8,11 +8,11 @@ class Whatsa::Section
   end
 
   def summary
-    self.paragraphs.first
+    self.paragraphs.first || "[no displayable information]"
   end
 
   def full_text
-    self.paragraphs.join("\n\n")
+    self.paragraphs.empty? ? "[no displayable information]" : self.paragraphs.join("\n\n")
   end
 
   private
