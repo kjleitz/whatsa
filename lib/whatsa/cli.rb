@@ -62,7 +62,8 @@ class Whatsa::CLI
     stripped_title = dmb.title.gsub("(disambiguation)", "").strip
     puts "Hmmm... #{stripped_title} could mean a few different things:\n"
     dmb.descriptions.each_with_index do |kvp, i|
-      puts "#{i + 1}. #{kvp[0].to_s} (#{kvp[1]})"
+      desc = kvp[1].empty? ? "" : " - #{kvp[1]}"
+      puts "#{i + 1}. #{kvp[0].to_s}" + desc
     end
     puts "\nPlease select a choice, either by name or number."
   end
