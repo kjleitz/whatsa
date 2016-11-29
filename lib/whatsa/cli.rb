@@ -92,7 +92,8 @@ class Whatsa::CLI
     choice = nil
     loop do
       choice = gets_command
-      in_choices = disambig.choices.detect { |c| c == choice.downcase }
+      binding.pry
+      in_choices = disambig.choices.detect { |c| c.downcase == choice }
       break if in_choices || choice.to_i > 0
     end
     disambig.choose_article(choice)
