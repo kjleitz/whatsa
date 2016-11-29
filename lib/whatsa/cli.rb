@@ -24,7 +24,7 @@ class Whatsa::CLI
     input = nil
     loop do
       print "> "
-      input = gets.strip
+      input = gets.strip.downcase
       case input
       when "exit"
         exit
@@ -92,7 +92,7 @@ class Whatsa::CLI
     choice = nil
     loop do
       choice = gets_command
-      in_choices = disambig.choices.detect { |c| c.downcase == choice.downcase }
+      in_choices = disambig.choices.detect { |c| c == choice.downcase }
       break if in_choices || choice.to_i > 0
     end
     disambig.choose_article(choice)
@@ -110,7 +110,7 @@ class Whatsa::CLI
     puts word_wrap(text.summary)
     summary_helpline
     input = gets_command
-    input.downcase == "more" ? full(text) : input
+    input == "more" ? full(text) : input
   end
 
   def full(text)
@@ -145,9 +145,7 @@ class Whatsa::CLI
       # the only valid input here that would go uncaught is "other", so
       # keep asking until you get a caught input (logic determined by
       # #gets_command, e.g. "help", "exit", "new") or "other"
-      loop do
-        input = input.downcase == "other" ? summarize(get_sec_choice(article)) : gets_command
-      end
+      loop { input = input == "other" ? summarize(get_sec_choice(article)) : gets_command }
     end
   end
 end
