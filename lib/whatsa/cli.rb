@@ -102,6 +102,7 @@ class Whatsa::CLI
 
   def summarize(text)
     system("clear")
+    return full(text) if text.summary == text.full_text
     puts word_wrap(text.summary)
     summary_helpline
     input = gets_command
