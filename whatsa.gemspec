@@ -26,5 +26,6 @@ If you're not super satisfied with that bit of information (and you need to know
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "nokogiri"
+  spec.add_development_dependency "pry"
 
 end
