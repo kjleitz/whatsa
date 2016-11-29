@@ -100,6 +100,12 @@ class Whatsa::CLI
     disambig.choose_article(choice)
   end
 
+  def get_sec_choice(article)
+    display_sections(article)
+    choice = gets_command
+    article.choose_section(choice)
+  end
+
   def summarize(text)
     system("clear")
     return full(text) if text.summary == text.full_text
@@ -114,13 +120,6 @@ class Whatsa::CLI
     puts word_wrap(text.full_text)
     full_text_helpline
     gets_command
-  end
-
-  def categories(article)
-    display_sections(article)
-    choice = gets_command
-    section = article.choose_section(choice)
-    summarize(section)
   end
 
   def run
@@ -148,7 +147,9 @@ class Whatsa::CLI
       # the only valid input here that would go uncaught is "other", so
       # keep asking until you get a caught input (logic determined by
       # #gets_command, e.g. "help", "exit", "new") or "other"
-      loop { input = input.downcase == "other" ? categories(article) : gets_command }
+      loop do
+        input = input.downcase == "other" ? summarize(get_sec_choice(article)) : gets_command
+      end
     end
   end
 end
