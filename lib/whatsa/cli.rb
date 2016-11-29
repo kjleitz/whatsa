@@ -121,8 +121,26 @@ class Whatsa::CLI
   end
 
   def run
+    # This is the main method for running the CLI.
+    # It consists of three main parts:
+    # Part one - decorative - Welcome the user, give instructions for use
+    # Part two - initialize - Get a query from the user and try to make an
+    #                         article out of whatever comes back (results page,
+    #                         disambiguation page, or article)
+    # Part three - article  - We've gotten to an article, display it to the user
+    #                         and loop as long as they wish to select different
+    #                         sections
+
+
+    ##########
+    # PART ONE
+
     welcome
     instructions
+
+
+    ##########
+    # PART TWO
 
     # get a search term
     input = ask
@@ -138,6 +156,10 @@ class Whatsa::CLI
     else
       article = scraper.make_article
     end
+
+
+    ############
+    # PART THREE
 
     # summarize that article
     input = summarize(article)
