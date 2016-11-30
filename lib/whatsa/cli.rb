@@ -1,7 +1,7 @@
 class Whatsa::CLI
 
   def clear_screen
-    25.times { puts "\n" }
+    50.times { puts "\n" }
     system('clear')
   end
 
