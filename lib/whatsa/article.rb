@@ -50,8 +50,10 @@ class Whatsa::Article
     secs = [Whatsa::Section.new("#{self.title} - Introduction", intro_pars)]
     indices.each_cons(2) do |i, j|
       title = self.contents[i].text.gsub('[edit]', '').strip
-      par_nodes = self.contents[i...j].select { |e| e.name == 'p' && e.text != "" }
-      pars = par_nodes.map { |par| par.text }
+      par_nodes = self.contents[i...j].select do |e|
+        e.name == 'p' || e.name == 'ul' && e.text != ""
+      end
+      pars = par_nodes.map { |par| par.text.strip }
       secs << Whatsa::Section.new(title, pars).tap { |s| s.article = self }
     end
     secs
