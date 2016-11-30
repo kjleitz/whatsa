@@ -1,7 +1,12 @@
 class Whatsa::CLI
 
-  def welcome
+  def clear_screen
+    25.times { puts "\n" }
     system('clear')
+  end
+
+  def welcome
+    clear_screen
     puts "Whatsa is a quick-and-dirty lookup utility, powered by Wikipedia!"
     puts "-----------------------------------------------------------------"
   end
@@ -56,7 +61,7 @@ class Whatsa::CLI
 
   def display_dmb(dmb)
     raise TypeError unless dmb.is_a?(Whatsa::Disambig)
-    system("clear")
+    clear_screen
     stripped_title = dmb.title.gsub("(disambiguation)", "").strip
     puts "Hmmm... #{stripped_title} could mean a few different things:\n"
     dmb.descriptions.each_with_index do |kvp, i|
@@ -68,7 +73,7 @@ class Whatsa::CLI
 
   def display_sections(text)
     text = text.article if text.is_a?(Whatsa::Section)
-    system("clear")
+    clear_screen
     puts "Here are some specific subjects about '#{text.title}':\n"
     text.section_titles.each_with_index {|title, i| puts "#{i + 1}. #{title}"}
     puts "\nPlease select a choice, either by name or number."
@@ -105,7 +110,7 @@ class Whatsa::CLI
   end
 
   def summarize(text)
-    system("clear")
+    clear_screen
     return full(text) if text.summary == text.full_text
     puts word_wrap(text.summary)
     summary_helpline
@@ -114,7 +119,7 @@ class Whatsa::CLI
   end
 
   def full(text)
-    system("clear")
+    clear_screen
     puts word_wrap(text.full_text)
     full_text_helpline
     gets_command
