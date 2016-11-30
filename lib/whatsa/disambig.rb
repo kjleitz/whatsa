@@ -32,7 +32,7 @@ class Whatsa::Disambig
         all_link = key.match("All pages with titles")
         unless toc_link || dmb_link || all_link
           desc = item.text.split("\n").first.strip
-          memo[key] = desc.gsub(key, "").gsub(/\A[^\w"]/, "").strip
+          memo[key] = desc.gsub(/^#{Regexp.escape(key)}[^\w"]/, "").strip
         end
       end
       memo
