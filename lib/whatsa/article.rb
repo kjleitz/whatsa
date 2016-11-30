@@ -39,6 +39,7 @@ class Whatsa::Article
 
   def intro_pars
     breakpoint = self.contents.to_a.index { |element| element.name == 'h2' }
+    breakpoint ||= -1 # breakpoint would be nil for zero-section articles
     pars = self.contents[0...breakpoint].css('p').map { |par| par.text }
     pars.reject { |par| par == "" }
   end
