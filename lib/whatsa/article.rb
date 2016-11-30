@@ -6,6 +6,10 @@ class Whatsa::Article
     @title = noko_doc.css('h1').text
     @contents = noko_doc.css('#mw-content-text').children
     @sections = make_sections
+
+    # comment out the next line if you want sections with non-<p> and non-<ul>
+    # content to display as "[no displayable information]"
+    remove_empty_sections
   end
 
   def summary
@@ -65,5 +69,9 @@ class Whatsa::Article
       indices << i if element.name == 'h2'
     end
     indices
+  end
+
+  def remove_empty_sections
+    self.sections.reject! { |sec| sec.summary == "[no displayable information]" }
   end
 end
