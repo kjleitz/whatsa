@@ -44,14 +44,15 @@ class Whatsa::CLI
     input
   end
 
-  def word_wrap(text)
+  # setting an indent will indent the lines AFTER the first line of a paragraph
+  def word_wrap(text, indent=0)
     count = 0
     words = text.split(/ /)
     words.each_with_index do |word, index|
       count += word.length + 1
       if count > 80
-        words.insert(index, "\n")
-        count = 0
+        words.insert(index, "\n#{' ' * indent}")
+        count = indent
       elsif word.index("\n")
         count = word.length
       end
@@ -65,8 +66,10 @@ class Whatsa::CLI
     stripped_title = dmb.title.gsub("(disambiguation)", "").strip
     puts word_wrap("Hmmm... #{stripped_title} could mean a few different things:\n")
     dmb.descriptions.each_with_index do |kvp, i|
+      num = "#{i + 1}. "
+      item = "#{kvp[0].to_s}"
       desc = kvp[1].empty? ? "" : " - #{kvp[1]}"
-      puts word_wrap("#{i + 1}. #{kvp[0].to_s}" + desc)
+      puts word_wrap(num + item + desc, num.length)
     end
     puts "\nPlease select a choice, either by name or number."
   end
@@ -75,7 +78,9 @@ class Whatsa::CLI
     text = text.article if text.is_a?(Whatsa::Section)
     clear_screen
     puts word_wrap("Here are some specific subjects about '#{text.title}':\n")
-    text.section_titles.each_with_index { |title, i| puts word_wrap("#{i + 1}. #{title}") }
+    text.section_titles.each_with_index do |title, i|
+      puts word_wrap("#{i + 1}. #{title}", "#{i + 1}. ".length)
+    end
     puts "\nPlease select a choice, either by name or number."
   end
 
