@@ -63,10 +63,10 @@ class Whatsa::CLI
     raise TypeError unless dmb.is_a?(Whatsa::Disambig)
     clear_screen
     stripped_title = dmb.title.gsub("(disambiguation)", "").strip
-    puts "Hmmm... #{stripped_title} could mean a few different things:\n"
+    puts word_wrap("Hmmm... #{stripped_title} could mean a few different things:\n")
     dmb.descriptions.each_with_index do |kvp, i|
       desc = kvp[1].empty? ? "" : " - #{kvp[1]}"
-      puts "#{i + 1}. #{kvp[0].to_s}" + desc
+      puts word_wrap("#{i + 1}. #{kvp[0].to_s}" + desc)
     end
     puts "\nPlease select a choice, either by name or number."
   end
@@ -74,8 +74,8 @@ class Whatsa::CLI
   def display_sections(text)
     text = text.article if text.is_a?(Whatsa::Section)
     clear_screen
-    puts "Here are some specific subjects about '#{text.title}':\n"
-    text.section_titles.each_with_index {|title, i| puts "#{i + 1}. #{title}"}
+    puts word_wrap("Here are some specific subjects about '#{text.title}':\n")
+    text.section_titles.each_with_index { |title, i| puts word_wrap("#{i + 1}. #{title}") }
     puts "\nPlease select a choice, either by name or number."
   end
 
@@ -153,7 +153,7 @@ class Whatsa::CLI
 
     # get an article from the search, or restart the loop if it can't be found
     if scraper.not_found?
-      print "Hmmm... I don't know what '#{input}' means!\nPress 'enter' to try something else."
+      print word_wrap("Hmmm... I don't know what '#{input}' means!\nPress 'enter' to try something else.")
       gets
       run
     elsif scraper.disambig?
