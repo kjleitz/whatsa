@@ -5,6 +5,7 @@ class Whatsa::Section
     @title = title
     @paragraphs = paragraphs
     remove_citations
+    bullet_list_pars
   end
 
   def summary
@@ -19,6 +20,10 @@ class Whatsa::Section
 
   def remove_citations
     self.paragraphs.map! { |par| par.gsub(/\[(\d+|citation needed)\]/, "") }
+  end
+
+  def bullet_list_pars
+    self.paragraphs.map! { |par| par.index("\n") ? par.gsub(/^/, "- ") : par }
   end
 
 end
