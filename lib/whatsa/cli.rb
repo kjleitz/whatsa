@@ -49,22 +49,6 @@ class Whatsa::CLI
     input
   end
 
-  # setting an indent will indent the lines AFTER the first line of a paragraph
-  def word_wrap(text, indent=0)
-    count = 0
-    words = text.split(/ /)
-    words.each_with_index do |word, index|
-      count += word.length + 1
-      if count > 80
-        words.insert(index, "\n#{' ' * indent}")
-        count = indent
-      elsif word.index("\n")
-        count = word.length
-      end
-    end
-    words.join(" ").gsub(/^ /, "")
-  end
-
   def display_dmb(dmb)
     raise TypeError unless dmb.is_a?(Whatsa::Disambig)
     clear_screen
