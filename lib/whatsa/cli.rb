@@ -142,13 +142,13 @@ class Whatsa::CLI
       # PART TWO
 
       # get a search term
-      ask
+      input = ask
 
     else
       input = ARGV.join(" ")
       ARGV.clear
     end
-    
+
     scraper = Whatsa::Scraper.new(input)
 
     # get an article from the search, or restart the loop if it can't be found
