@@ -23,7 +23,7 @@ class Whatsa::Section
   end
 
   def bullet_list_pars
-    self.paragraphs.map! { |par| par.index("\n") ? par.gsub(/^/, "- ") : par }
+    self.paragraphs.map! { |par| bulletize_lines(par) }
   end
 
 end
