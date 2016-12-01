@@ -19,7 +19,7 @@ class Whatsa::Section
   private
 
   def remove_citations
-    self.paragraphs.map! { |par| par.gsub(/\[(\d+|citation needed)\]/, "") }
+    self.paragraphs.map! { |par| remove_citation_markers(par) }
   end
 
   def bullet_list_pars
