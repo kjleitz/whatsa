@@ -44,6 +44,14 @@ If you would like to select a category of information about the topic, type `oth
 
 If you'd like to search for something else, type `new`.
 
+If you wanna be slick, you can provide your search terms right from the command line:
+
+```
+userloser@lappytoppy:~$ whatsa club sandwich
+```
+
+That'll return the article for Club Sandwich, the same way it would have had you done it the longer way above. However, it won't give you the warm welcome and instructions that a newbie might find valuable right off the bat, so keep that in mind. Using the `help` command still works, though, so _you'll be okay_.
+
 ## Contributing
 
 Bug reports and pull requests for this project are welcome at its [GitHub page](https://github.com/kjleitz/Whatsa). If you choose to contribute, please adhere to the [Ruby Community Conduct Guideline](https://www.ruby-lang.org/en/conduct/) so I don't have to go around breaking necks, running out of bubblegum, etc.
