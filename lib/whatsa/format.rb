@@ -14,7 +14,8 @@ module Whatsa
     end
 
     def bulletize_lines(string)
-      string.index("\n") ? string.gsub(/^/, "- ") : string
+      list = string.index("\n") ? string.gsub(/^/, "- ") : string
+      word_wrap(list, "- ".length)
     end
 
     # setting an indent will indent the lines AFTER the first line of a paragraph
