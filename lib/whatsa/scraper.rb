@@ -1,4 +1,6 @@
 class Whatsa::Scraper
+  include Whatsa::Format
+  # Should not include this like this
 
   WIKISEARCH = 'https://en.wikipedia.org/w/index.php?search='
 
@@ -7,8 +9,7 @@ class Whatsa::Scraper
   def initialize(term)
     # only keep word chars and parens, turn everything between each 'word'
     # to a single '+' and remove '+'s at the beginning and end if they're there
-    # @query = term.gsub(/\W+/, '+').gsub(/(\A\+|\+\z)/, '')
-    @query = term.gsub(/[^A-z0-9\(\)]+/, '+').gsub(/(\A\+|\+\z)/, '')
+    @query = url_friendly(term)
 
     # store the page in an instance variable so we don't keep polling the site
     @page = Nokogiri::HTML(open(WIKISEARCH + self.query))
@@ -46,5 +47,4 @@ class Whatsa::Scraper
   def make_disambig
     disambig? ? Whatsa::Disambig.new(self.page) : nil
   end
-
 end
