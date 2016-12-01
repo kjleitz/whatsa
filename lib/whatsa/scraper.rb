@@ -1,6 +1,9 @@
 class Whatsa::Scraper
+  # I think this is a bad use of include. I feel like I _should_ make Format a
+  # class and use its methods that way, but I'm going to be using them so often
+  # that I would prefer they not be referenced as Whatsa::Format.blah_blah every
+  # time...
   include Whatsa::Format
-  # Should not include this like this
 
   WIKISEARCH = 'https://en.wikipedia.org/w/index.php?search='
 
