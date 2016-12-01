@@ -130,19 +130,25 @@ class Whatsa::CLI
     #                         and loop as long as they wish to select different
     #                         sections
 
+    if ARGV.empty?
 
-    ##########
-    # PART ONE
+      ##########
+      # PART ONE
 
-    welcome
-    instructions
+      welcome
+      instructions
 
+      ##########
+      # PART TWO
 
-    ##########
-    # PART TWO
+      # get a search term
+      ask
 
-    # get a search term
-    input = ask
+    else
+      input = ARGV.join(" ")
+      ARGV.clear
+    end
+    
     scraper = Whatsa::Scraper.new(input)
 
     # get an article from the search, or restart the loop if it can't be found
