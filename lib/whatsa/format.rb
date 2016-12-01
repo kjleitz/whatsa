@@ -13,5 +13,9 @@ module Whatsa
       string.gsub(/\[(\d+|citation needed)\]/, "")
     end
 
+    def bulletize_lines(string)
+      string.index("\n") ? string.gsub(/^/, "- ") : string
+    end
+
   end
 end
