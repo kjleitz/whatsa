@@ -14,24 +14,32 @@ module Whatsa
     end
 
     def bulletize_lines(string)
-      list = string.index("\n") ? string.gsub(/^/, "- ") : string
-      word_wrap(list, "- ".length)
+      if string.index("\n")
+        list = string.gsub(/^/, "- ")
+        word_wrap(list, "- ".length)
+      else
+        string
+      end
     end
 
     # setting an indent will indent the lines AFTER the first line of a paragraph
     def word_wrap(text, indent=0)
-      count = 0
-      words = text.split(/ /)
-      words.each_with_index do |word, index|
-        count += word.length + 1
-        if count > 80
-          words.insert(index, "\n#{' ' * indent}")
-          count = indent
-        elsif word.index("\n")
-          count = word.length
+      chars = text.split(//)
+      unless text.length < 80
+        count = 1
+        last_space = 80
+        chars.each_with_index do |char, index|
+          count += 1
+          last_space = index if char.match(/ /)
+          if char == "\n"
+            count = indent
+          elsif count == 80
+            chars[last_space] = "\n#{" " * indent}"
+            count = indent + index - last_space
+          end
         end
       end
-      words.join(" ").gsub(/^ /, "")
+      chars.join
     end
 
   end
