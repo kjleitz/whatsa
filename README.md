@@ -50,7 +50,7 @@ If you wanna be slick, you can provide your search terms right from the command 
 userloser@lappytoppy:~$ whatsa club sandwich
 ```
 
-That'll return the article for Club Sandwich, the same way it would have had you done it the longer way above. However, it won't give you the warm welcome and instructions that a newbie might find valuable right off the bat, so keep that in mind. Using the `help` command still works, though, so _you'll be okay_.
+That'll return the article for Club Sandwich, the same way it would have, had you done it the longer way above. However, it won't give you the warm welcome and instructions that a newbie might find valuable right off the bat, so keep that in mind. Using the `help` command still works, though, so _you'll be okay_.
 
 ## Contributing
 
