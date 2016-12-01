@@ -9,5 +9,9 @@ module Whatsa
       string.gsub('[edit]', '').strip
     end
 
+    def remove_citation_markers(string)
+      string.gsub(/\[(\d+|citation needed)\]/, "")
+    end
+
   end
 end
