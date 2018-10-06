@@ -23,9 +23,9 @@ If you're not super satisfied with that bit of information (and you need to know
   spec.executables << "whatsa"
   spec.require_paths = ["lib", "lib/whatsa"]
 
+  spec.add_runtime_dependency "nokogiri", "~> 1.8.5"
+
   spec.add_development_dependency "bundler", "~> 1.13"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "nokogiri", "~> 1.6.8"
   spec.add_development_dependency "pry"
-
 end

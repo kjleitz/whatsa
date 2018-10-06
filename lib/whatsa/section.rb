@@ -31,5 +31,4 @@ class Whatsa::Section
   def bullet_list_pars
     self.paragraphs.map! { |par| bulletize_lines(par) }
   end
-
 end

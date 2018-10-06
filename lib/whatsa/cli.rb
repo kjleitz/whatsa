@@ -93,14 +93,19 @@ class Whatsa::CLI
       choice = gets_command
       in_choices = disambig.choices.detect { |c| c.downcase == choice }
       break if in_choices || choice.to_i > 0
+      puts "Hmm... I don't think that's a valid choice. Try again!"
     end
     disambig.choose_article(choice)
   end
 
   def get_sec_choice(article)
     display_sections(article)
-    choice = gets_command
-    article.choose_section(choice)
+    loop do
+      choice = gets_command
+      section = article.choose_section(choice)
+      return section if section
+      puts "Hmm... I don't think that's a valid section. Try again!"
+    end
   end
 
   def summarize(text)
