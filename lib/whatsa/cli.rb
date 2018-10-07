@@ -23,30 +23,49 @@ class Whatsa::CLI
     puts "regarding that subject, which you can choose by number or name."
     puts "You can type 'exit' to close the program (or 'help' to receive"
     puts "these instructions again) at any time!"
+    puts ""
   end
 
   def ask
     puts "What would you like to know about?"
-    gets_command
+    gets_command(true)
   end
 
-  def gets_command
-    input = nil
+  def gets_command(treat_as_query = false)
+    command_type = {
+      "exit" => "exit",
+      "quit" => "exit",
+      "q"    => "exit",
+
+      "help"         => "help",
+      "h"            => "help",
+      "instructions": ("help" unless treat_as_query),
+
+      "new"            => "new",
+      "different"      => ("new" unless treat_as_query),
+      "something else" => ("new" unless treat_as_query),
+      "again"          => ("new" unless treat_as_query),
+
+      "other"      => ("other" unless treat_as_query),
+      "categories" => ("other" unless treat_as_query),
+      "category"   => ("other" unless treat_as_query),
+      "dig"        => ("other" unless treat_as_query),
+
+      "" => "blank"
+    }
+
     loop do
       print "> "
       input = gets.strip.downcase
-      case input
-      when "exit"
-        exit
-      when "help"
-        instructions
-      when "new"
-        run
-      else
-        break
+      case command_type[input]
+      when "exit"  then exit
+      when "help"  then instructions
+      when "new"   then return run
+      when "other" then return "other"
+      when ""      then next
+      else return input
       end
     end
-    input
   end
 
   def display_dmb(dmb)
